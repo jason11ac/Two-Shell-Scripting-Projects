@@ -1,0 +1,24 @@
+#!/bin/bash
+
+
+grep "<td>" |
+
+sed 's/<[^>]*>//g' |
+
+tr -s "[:blank:]" |
+
+sed 's/\r/\n/g' |
+
+tr , '\n' |
+
+tr [:blank:] '\n' |
+
+tr -s "\n" |
+
+tr '[:upper:]' '[:lower:]' |
+
+sed 's/`/'"'"'/g' |
+
+sed '/[^p^k^'\''^m^n^w^l^h^a^e^i^o^u]/d' |
+
+sort -u

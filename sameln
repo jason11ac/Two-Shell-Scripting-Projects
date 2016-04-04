@@ -1,0 +1,27 @@
+#!/bin/bash
+
+dir=$1
+
+declare -a ARRAY=($(find $dir -maxdepth 1 -type f | sort))
+
+temp=0
+
+sizeofarray=${#ARRAY[@]}
+
+while [ $temp -lt $sizeofarray ]
+do
+    acc=$((temp+1))
+    first=${ARRAY[temp]}
+    while [ $acc -lt $sizeofarray ]
+    do
+	second=${ARRAY[acc]}
+	cmp -s "$first" "$second"
+	if [ $? -eq 0 ]
+	then
+	    rm "$second"
+	    ln "$first" "$second"
+	fi
+	acc=$((acc+1))
+    done
+    temp=$((temp+1))
+done
